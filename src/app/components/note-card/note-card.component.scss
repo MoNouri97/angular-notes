@@ -1,8 +1,8 @@
 @import "../../../main-styles.scss";
-
+$bg: $dark-fg;
 .note-card-container {
   position: relative;
-  background: white;
+  background: $bg;
   border-radius: 5px;
   box-shadow: 0 2px 15px 2px rgba($color: black, $alpha: 0.06);
   transition: box-shadow 0.2s ease-out;
@@ -38,9 +38,9 @@
         width: 100%;
         background: linear-gradient(
           to bottom,
-          rgba(white, 0) 0%,
-          rgba(white, 0.8) 50%,
-          white 100%
+          rgba($bg, 0) 0%,
+          rgba($bg, 0.8) 50%,
+          $bg 100%
         );
       }
     }

@@ -6,12 +6,16 @@
 
 // Set your brand colors
 $purple: #a59ad7;
+$main: #3c365e;
 $pink: #fe76c2;
 $blue: #37c7f2;
 $brown: #757763;
-$light-red: #fff3f3;
+$light-red: #f37474;
 $light: #fafcff;
+$light-fg: #f3f5fa;
 $green: #0bf387;
+$dark: #161616;
+$dark-fg: #1a1919;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
@@ -19,11 +23,12 @@ $primary: $purple;
 $link: $blue;
 
 // Update some of Bulma's component variables
-$body-background-color: $light;
+$body-background-color: $dark;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
-$input-background-color: #f3f5fa;
+$input-background-color: $dark-fg;
+$label-color:#7c7c7c ;
 
 // Global
 
@@ -33,6 +38,7 @@ body {
   // default font size;
   font-size: 18px !important;
   overflow: hidden !important;
+  color: rgb(189, 189, 189) !important;
 }
 
 // // Import only what you need from Bulma
