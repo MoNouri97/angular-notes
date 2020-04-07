@@ -9,16 +9,15 @@ import {
   Output,
   EventEmitter,
 } from "@angular/core";
+import { Note } from "src/app/shared/note.model";
 
 @Component({
   selector: "app-note-card",
   templateUrl: "./note-card.component.html",
   styleUrls: ["./note-card.component.scss"],
 })
-export class NoteCardComponent implements OnInit, AfterViewInit {
-  @Input() title: string;
-  @Input() body: string;
-  @Input() link: string;
+export class NoteCardComponent implements AfterViewInit {
+  @Input() note: Note;
 
   @Output("delete") deleteEvent: EventEmitter<void> = new EventEmitter<void>();
 

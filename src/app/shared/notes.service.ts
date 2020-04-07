@@ -7,27 +7,32 @@ import { Note } from "./note.model";
 export class NotesService {
   notes: Note[] = new Array<Note>();
 
-  constructor() {}
+  constructor() {
+    for (let i = 0; i < 10; i++) {
+      this.notes.push(new Note("note " + i, "body for note " + i));
+    }
+  }
 
   getAll(): Note[] {
     return this.notes;
   }
-  get(id: number) {
-    return this.notes[id];
+  get(id: number): Note {
+    return this.notes.find((n) => n.id == id);
   }
-  getId(note: Note) {
-    return this.notes.indexOf(note);
-  }
+  // getId(note: Note) {
+  //   return this.notes.indexOf(note);
+  // }
   add(note: Note) {
     let newLength = this.notes.push(note);
-    return newLength - 1;
+    return newLength;
   }
   update(id: number, title: string, body: string) {
-    let note = this.notes[id];
+    let note = this.get(id);
     note.title = title;
     note.body = body;
   }
   delete(id: number) {
-    this.notes.splice(id, 1);
+    this.notes = this.notes.filter((n) => n.id != id);
+    console.log(this.notes.length);
   }
 }

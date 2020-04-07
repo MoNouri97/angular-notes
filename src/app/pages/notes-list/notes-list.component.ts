@@ -101,14 +101,80 @@ import {
 })
 export class NotesListComponent implements OnInit {
   notes: Note[] = new Array<Note>();
+  filteredNotes: Note[];
   constructor(private notesService: NotesService) {}
 
   ngOnInit(): void {
     Feather.replace();
 
     this.notes = this.notesService.getAll();
+    this.filteredNotes = this.notes;
   }
   deleteNote(id: number) {
+    this.notes = this.notes.filter((n) => n.id != id);
+    this.filteredNotes = this.filteredNotes.filter((n) => n.id != id);
     this.notesService.delete(id);
+  }
+
+  filter(query: string) {
+    // getting words
+    query = query.toLowerCase().trim();
+
+    if (query == "") {
+      // empty search
+      this.filteredNotes = this.notes;
+      return;
+    }
+
+    let terms: string[] = query.split(" ");
+
+    // removing duplicates
+    terms = this.removeDuplicates(terms);
+
+    let allResults: Note[] = new Array<Note>();
+
+    terms.forEach((term) => {
+      let results: Note[] = this.relevantNotes(term);
+      allResults.push(...results);
+    });
+
+    let uniqueResults = this.removeDuplicates(allResults);
+    this.filteredNotes = uniqueResults;
+    this.sortByRelevancy(allResults);
+  }
+
+  removeDuplicates(arr: Array<any>): Array<any> {
+    let unique: Set<any> = new Set<any>();
+
+    arr.forEach((e) => unique.add(e));
+    return Array.from(unique);
+  }
+
+  relevantNotes(query: string): Note[] {
+    query = query.toLowerCase().trim();
+    let relevant = this.notes.filter((note) => {
+      return (
+        (note.body && note.body.toLowerCase().trim().includes(query)) ||
+        note.title.toLowerCase().trim().includes(query)
+      );
+    });
+    return relevant;
+  }
+
+  sortByRelevancy(searchRes: Note[]) {
+    let noteCount: object = {};
+
+    searchRes.forEach((note) => {
+      let noteId = note.id;
+
+      if (noteCount[noteId]) {
+        noteCount[noteId] += 1;
+      } else {
+        noteCount[noteId] = 1;
+      }
+    });
+    this.filteredNotes = this.filteredNotes.sort((a, b) => {
+      return noteCount[b.id] - noteCount[a.id];
+    });
   }
 }

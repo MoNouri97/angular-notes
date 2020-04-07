@@ -21,7 +21,7 @@ export class NoteDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.note = new Note();
+    this.note = new Note("", "");
 
     // creating or editing
     this.route.params.subscribe((params: Params) => {
@@ -37,7 +37,8 @@ export class NoteDetailsComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (this.new) {
       // save note
-      this.notesService.add(form.value);
+      let noteData = new Note(form.value.title, form.value.body);
+      this.notesService.add(noteData);
     } else {
       this.notesService.update(this.noteId, form.value.title, form.value.body);
     }

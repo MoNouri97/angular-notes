@@ -1,12 +1,12 @@
 <div class="note-card-container" #container>
-  <a [routerLink]="link">
+  <a [routerLink]="note.id">
     <div class="note-card-content">
       <h1 class="note-card-title">
-        {{ title }}
+        {{ note.title }}
       </h1>
       <div #bodyText class="note-card-body">
         <p>
-          {{ body }}
+          {{ note.body }}
         </p>
         <div #fade class="fade-out-truncation"></div>
       </div>
