@@ -10,9 +10,17 @@
     </div>
   </div>
 
-  <div class="notes-list">
-    <app-note-card title="title" body="body"></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
+  <div class="notes-list" [@listAnim]>
+    <app-note-card
+      *ngFor="let note of notes; index as i"
+      [title]="note.title"
+      [body]="note.body"
+      [link]="i"
+      (delete)="deleteNote(i)"
+      @itemAnim
+    ></app-note-card>
   </div>
+  <button class="button floating-add-button is-primary" routerLink="new">
+    + Add
+  </button>
 </div>

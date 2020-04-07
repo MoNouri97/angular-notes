@@ -5,17 +5,22 @@ import {
   ElementRef,
   Renderer2,
   AfterViewInit,
-  Input
+  Input,
+  Output,
+  EventEmitter,
 } from "@angular/core";
 
 @Component({
   selector: "app-note-card",
   templateUrl: "./note-card.component.html",
-  styleUrls: ["./note-card.component.scss"]
+  styleUrls: ["./note-card.component.scss"],
 })
 export class NoteCardComponent implements OnInit, AfterViewInit {
   @Input() title: string;
   @Input() body: string;
+  @Input() link: string;
+
+  @Output("delete") deleteEvent: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild("fade")
   fade: ElementRef<HTMLElement>;
@@ -34,5 +39,7 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit(): void {}
+  onDelete() {
+    this.deleteEvent.emit();
+  }
 }
