@@ -1,27 +1,47 @@
-# NotesFrontend
+# Angular Notes
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
+
+---
+
+A simple note taking app using Angular .
+
+## Features
+
+- saving notes
+- Editing and Removing
+- Searching
+
+the search feature filters the notes to only show ones containing at least one word in the search query , then the notes are **sorted by relevancy** (the ones with more matches are first on the list).
+
+**[See Screenshot below](###Search)**
+
+The app is using local storage to save notes
+
+```ts
+updateStorage() {
+    localStorage.setItem("notes", JSON.stringify(this.notes));
+  }
+```
+
+## UI
+
+Designed using Bulma CSS framework **with some customization**,
+[Changed Styles are here](./src/main-styles.scss)
+And used Angular Animation for the the animations
+
+### Home
+
+![screenshot](< screenshots/Screenshot from 2020-04-07 23-33-22.png> "Main screen")
+
+### Edit / View Note
+
+![screenshot](<screenshots/Screenshot from 2020-04-07 23-36-10.png> "Note screen")
+
+### Search
+
+![screenshot](<screenshots/Screenshot from 2020-04-07 23-37-11.png> "Search")
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
